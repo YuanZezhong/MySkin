@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="themeColor_red">#0FA74E</color>
+
+    <color name="textView_background_red">#A408C9</color>
+    <color name="textView_textColor_red">#489901</color>
+
+    <color name="btn_pressed_red">#9F20CA</color>
+    <color name="btn_nomarl_red">#3899AA</color>
+</resources>
