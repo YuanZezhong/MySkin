@@ -27,7 +27,7 @@ public class ViewAttrItem {
 
     public ViewAttrItem(View view, Set<Attr> attrs) {
         this(view);
-        attrs.addAll(attrs);
+        this.attrs.addAll(attrs);
     }
 
     public View getView() {

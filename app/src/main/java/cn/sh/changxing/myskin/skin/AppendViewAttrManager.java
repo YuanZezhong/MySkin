@@ -39,7 +39,7 @@ public class AppendViewAttrManager implements ViewAttrManager {
     }
 
     @Override
-    public void addViewAttrItem(View view, String attrName, int resid) {
+    public void addViewAttr(View view, String attrName, int resid) {
         if (view != null) {
             Attr attr = AttrFactory.createAttr(ThemeManager.getInstance().getOriginalResource(), attrName, resid);
             if (attr != null) {
@@ -61,6 +61,16 @@ public class AppendViewAttrManager implements ViewAttrManager {
         if (remove != null) {
             remove.destroy();
         }
+    }
+
+    @Override
+    public void removeViewAttrItems(View... views) {
+
+    }
+
+    @Override
+    public void removeViewAttr(View view, String attrName) {
+
     }
 
     @Override

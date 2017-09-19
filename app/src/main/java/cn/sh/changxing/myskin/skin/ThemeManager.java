@@ -16,10 +16,11 @@ import cn.sh.changxing.myskin.skin.resource.SingleResourceParser;
  */
 
 public class ThemeManager {
-    private static ThemeManager sInstance;
     public static final String THEME_NAME_DEFAULT = null;
     public static final int MODE_SINGLE_APP = 0;
     public static final int MODE_MULTI_APP = 1;
+
+    private static ThemeManager sInstance;
 
     private Context mContext;
     /**
@@ -168,7 +169,7 @@ public class ThemeManager {
             mCurrentResource.changeThemeInfo(themeInfo);
             ThemeInfo oldTheme = mCurrentTheme;
             mCurrentTheme = themeInfo;
-            notifyOnThemChanged(oldTheme, mCurrentTheme);
+            notifyThemeChanged(oldTheme, mCurrentTheme);
         }
     }
 
@@ -196,7 +197,7 @@ public class ThemeManager {
         }
     }
 
-    private void notifyOnThemChanged(ThemeInfo oldTheme, ThemeInfo newTheme) {
+    private void notifyThemeChanged(ThemeInfo oldTheme, ThemeInfo newTheme) {
         Set<Map.Entry<String, OnThemeChangedListener>> listeners = mListeners.entrySet();
         for (Map.Entry<String, OnThemeChangedListener> listener : listeners) {
             listener.getValue().onThemeChanged(oldTheme, newTheme);

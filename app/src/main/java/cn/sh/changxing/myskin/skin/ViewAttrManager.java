@@ -11,9 +11,13 @@ public interface ViewAttrManager {
 
     void removeViewAttrItem(ViewAttrItem item);
 
-    void addViewAttrItem(View view, String attrName, int resid);
+    void addViewAttr(View view, String attrName, int resid);
 
     void removeViewAttrItem(View view);
+
+    void removeViewAttrItems(View... views);
+
+    void removeViewAttr(View view, String attrName);
 
     void clear();
 

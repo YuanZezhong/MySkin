@@ -11,6 +11,7 @@ import java.util.Set;
 
 import cn.sh.changxing.myskin.skin.attr.Attr;
 import cn.sh.changxing.myskin.skin.attr.AttrFactory;
+import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 /**
  * Created by yuanyi on 17-9-17.
@@ -18,16 +19,19 @@ import cn.sh.changxing.myskin.skin.attr.AttrFactory;
 
 public class ThemeInflaterFactory implements LayoutInflater.Factory {
     private ViewAttrManager mViewAttrManager;
+    private LayoutInflater mInflater;
 
-    public ThemeInflaterFactory() {
+    public ThemeInflaterFactory(LayoutInflater inflater) {
         mViewAttrManager = new AppendViewAttrManager();
+        mInflater = inflater;
     }
 
-    public ThemeInflaterFactory(ViewAttrManager viewAttrManager) {
+    public ThemeInflaterFactory(LayoutInflater inflater, ViewAttrManager viewAttrManager) {
         if (viewAttrManager == null) {
             throw new IllegalArgumentException("viewAttrManager cannot be null!");
         }
         mViewAttrManager = viewAttrManager;
+        mInflater = inflater;
     }
 
     @Override
@@ -44,13 +48,8 @@ public class ThemeInflaterFactory implements LayoutInflater.Factory {
     }
 
     private View createView(String name, Context context, AttributeSet attrs) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        if (-1 == name.indexOf('.')) {
-
-        } else {
-
-        }
-        return null;
+        LayoutInflater inflater = mInflater == null? LayoutInflater.from(context): mInflater;
+        return ViewProducer.createViewFromTag(inflater, context, name, attrs);
     }
 
     private void parseAttr(View view, AttributeSet attrSet) {

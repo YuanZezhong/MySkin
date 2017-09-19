@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/android/skin"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,12 +13,14 @@
         android:gravity="center"
         android:background="@color/textView_background"
         android:textColor="@color/textView_textColor"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        skin:enable="true" />
 
     <Button
         android:id="@+id/btn_red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        skin:enable="true"
         android:background="@drawable/slt_button"
         android:text="红色主题"/>
 
@@ -25,17 +28,20 @@
         android:id="@+id/btn_original"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        skin:enable="true"
         android:background="@drawable/slt_button"
         android:text="默认主题"/>
+
+    <Button
+        android:id="@+id/btn_update_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/slt_button"
+        android:text="更新ListView"/>
 
     <ListView
         android:id="@+id/lv_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </fragment>
 </LinearLayout>

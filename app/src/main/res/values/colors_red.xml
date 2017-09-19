@@ -5,6 +5,6 @@
     <color name="textView_background_red">#A408C9</color>
     <color name="textView_textColor_red">#489901</color>
 
-    <color name="btn_pressed_red">#9F20CA</color>
+    <color name="btn_pressed_red">#021EEC</color>
     <color name="btn_nomarl_red">#3899AA</color>
 </resources>
