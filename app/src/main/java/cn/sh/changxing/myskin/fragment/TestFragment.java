@@ -3,6 +3,7 @@ package cn.sh.changxing.myskin.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import cn.sh.changxing.myskin.R;
 import cn.sh.changxing.myskin.skin.ThemeManager;
 import cn.sh.changxing.myskin.skin.base.ThemeFragment;
+import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 public class TestFragment extends ThemeFragment implements View.OnClickListener {
 
@@ -31,7 +33,8 @@ public class TestFragment extends ThemeFragment implements View.OnClickListener 
         mOriginalBtn = ((Button) view.findViewById(R.id.btn_original));
         mRedBtn.setOnClickListener(this);
         mOriginalBtn.setOnClickListener(this);
-        getChildFragmentManager().beginTransaction().replace(R.id.fl_fragment, new RecyclerViewFragment()).commit();
+        FragmentManager childFragmentManager = getChildFragmentManager();
+        childFragmentManager.beginTransaction().replace(R.id.fl_fragment, new RecyclerViewFragment()).commit();
     }
 
     @Override

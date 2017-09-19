@@ -34,7 +34,6 @@ public class MainActivity extends ThemeFragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LoggerFactory.getDefault().d("MainActivity inflater is {}", getLayoutInflater());
 
         initViews();
         init();

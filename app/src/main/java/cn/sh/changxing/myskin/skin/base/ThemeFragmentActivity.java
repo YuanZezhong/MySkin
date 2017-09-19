@@ -13,6 +13,7 @@ import cn.sh.changxing.myskin.skin.ThemeInflaterFactory;
 import cn.sh.changxing.myskin.skin.ThemeInfo;
 import cn.sh.changxing.myskin.skin.ThemeManager;
 import cn.sh.changxing.myskin.skin.ViewAttrManager;
+import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 /**
  * Created by YuanZezhong on 2017/9/19.
@@ -36,6 +37,10 @@ public abstract class ThemeFragmentActivity extends FragmentActivity implements 
         mViewAttrManager.applyThemeChange();
     }
 
+    /**
+     * 创建ViewAttrItem管理器, 用来管理此Activity中所有对应主题更换的View
+     * @return null使用SimpleViewAttrManager
+     */
     protected ViewAttrManager onCreateViewAttrManager() {
         return null;
     }

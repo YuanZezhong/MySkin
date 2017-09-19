@@ -17,7 +17,6 @@ public class SecondActivity extends ThemeFragmentActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        LoggerFactory.getDefault().d("SecondActivity inflater is {}", getLayoutInflater());
 
         initViews();
         init();

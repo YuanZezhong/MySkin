@@ -6,15 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cn.sh.changxing.myskin.skin.OnThemeChangedListener;
-import cn.sh.changxing.myskin.skin.ThemeInfo;
-
 /**
  * Created by YuanZezhong on 2017/9/19.
- *
- * 此Fragment必须和ThemeFragmentActivity一起使用
+ * <p>
+ * 1.此Fragment必须和ThemeFragmentActivity一起使用
+ * <p>
+ * 2.此Fragment中对应主题更换的View应交给宿主Activity的ViewAttrManager管理
  */
-public abstract class ThemeFragment extends Fragment implements OnThemeChangedListener {
+public abstract class ThemeFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
@@ -29,7 +28,7 @@ public abstract class ThemeFragment extends Fragment implements OnThemeChangedLi
         super.onDestroyView();
         View view = getView();
         if (view != null) {
-            removeAllViewAttrs(view);
+            onRemoveAllViewAttrs(view);
         }
     }
 
@@ -43,21 +42,17 @@ public abstract class ThemeFragment extends Fragment implements OnThemeChangedLi
     }
 
     /**
-     * 清理此Fragment中所有对应改变主题的View
+     * 清理此Fragment中所有对应主题更换的View
+     * <p>
+     * 默认实现是从根View开始递归清理
      */
-    protected void removeAllViewAttrs(View view) {
+    protected void onRemoveAllViewAttrs(View view) {
+        ((ThemeFragmentActivity) getActivity()).getViewAttrManager().removeViewAttrItem(view);
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                removeAllViewAttrs(viewGroup.getChildAt(i));
+                onRemoveAllViewAttrs(viewGroup.getChildAt(i));
             }
-        } else {
-            ((ThemeFragmentActivity) getActivity()).getViewAttrManager().removeViewAttrItem(view);
         }
-    }
-
-    @Override
-    public void onThemeChanged(ThemeInfo oldTheme, ThemeInfo newTheme) {
-
     }
 }
