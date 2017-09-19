@@ -40,4 +40,19 @@ public class ThemeInfo {
     public String getThemePath() {
         return themePath;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ThemeInfo themeInfo = (ThemeInfo) o;
+
+        return themeName != null ? themeName.equals(themeInfo.themeName) : themeInfo.themeName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return themeName != null ? themeName.hashCode() : 0;
+    }
 }

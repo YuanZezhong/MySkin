@@ -144,7 +144,15 @@ public class ThemeManager {
      * @return true:是, false:不是
      */
     public boolean isDefaultTheme() {
-        return mCurrentTheme.getThemeName() == THEME_NAME_DEFAULT;
+        return mCurrentTheme.equals(mDefaultTheme);
+    }
+
+    /**
+     * 判断指定主题是否为当前使用的主题
+     * @return true:是, false:不是
+     */
+    public boolean isCurrentTheme(ThemeInfo themeInfo) {
+        return mCurrentTheme.equals(themeInfo);
     }
 
     /**

@@ -2,7 +2,7 @@ package cn.sh.changxing.myskin;
 
 import android.app.Application;
 
-import cn.sh.changxing.myskin.activity.TextAttr;
+import cn.sh.changxing.myskin.attr.TextAttr;
 import cn.sh.changxing.myskin.skin.ThemeInfo;
 import cn.sh.changxing.myskin.skin.ThemeManager;
 import cn.sh.changxing.myskin.skin.attr.AttrFactory;

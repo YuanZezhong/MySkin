@@ -17,8 +17,6 @@ public interface ViewAttrManager {
 
     void removeViewAttrItems(View... views);
 
-    void removeViewAttr(View view, String attrName);
-
     void clear();
 
     void applyThemeChange();

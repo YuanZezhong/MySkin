@@ -11,7 +11,6 @@ import java.util.Set;
 
 import cn.sh.changxing.myskin.skin.attr.Attr;
 import cn.sh.changxing.myskin.skin.attr.AttrFactory;
-import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 /**
  * Created by yuanyi on 17-9-17.
@@ -22,7 +21,7 @@ public class ThemeInflaterFactory implements LayoutInflater.Factory {
     private LayoutInflater mInflater;
 
     public ThemeInflaterFactory(LayoutInflater inflater) {
-        mViewAttrManager = new AppendViewAttrManager();
+        mViewAttrManager = new SimpleViewAttrManager();
         mInflater = inflater;
     }
 

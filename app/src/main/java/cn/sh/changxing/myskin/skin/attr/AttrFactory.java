@@ -20,6 +20,7 @@ public class AttrFactory {
     static {
         sSupportAttr.put("textColor", TextColorAttr.class);
         sSupportAttr.put("background", BackgroundAttr.class);
+        sSupportAttr.put("src", SrcAttr.class);
     }
 
     /**

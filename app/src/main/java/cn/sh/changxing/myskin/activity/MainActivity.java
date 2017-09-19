@@ -1,7 +1,7 @@
 package cn.sh.changxing.myskin.activity;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,28 +15,26 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cn.sh.changxing.myskin.R;
-import cn.sh.changxing.myskin.skin.OnThemeChangedListener;
-import cn.sh.changxing.myskin.skin.ThemeInflaterFactory;
 import cn.sh.changxing.myskin.skin.ThemeInfo;
 import cn.sh.changxing.myskin.skin.ThemeManager;
+import cn.sh.changxing.myskin.skin.base.ThemeFragmentActivity;
 import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
-public class MainActivity extends Activity implements View.OnClickListener, OnThemeChangedListener, AdapterView.OnItemClickListener {
+public class MainActivity extends ThemeFragmentActivity
+        implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private TextView mTitleTv;
     private Button mRedBtn;
     private Button mOriginalBtn;
     private ListView mListView;
-    protected ThemeInflaterFactory mFactory;
     protected Button mUpdateBtn;
     protected MyAdapter mAdatper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mFactory = new ThemeInflaterFactory(getLayoutInflater());
-        getLayoutInflater().setFactory(mFactory);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LoggerFactory.getDefault().d("MainActivity inflater is {}", getLayoutInflater());
 
         initViews();
         init();
@@ -54,7 +52,6 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTh
     }
 
     private void init() {
-        ThemeManager.getInstance().addOnThemeChangedListener(this);
         mAdatper = new MyAdapter(this);
         mListView.setAdapter(mAdatper);
         mListView.setOnItemClickListener(this);
@@ -62,9 +59,6 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTh
 
     @Override
     protected void onDestroy() {
-        mFactory.getViewAttrManager().clear();
-        ThemeManager.getInstance().removeOnThemeChangedListener(this);
-
         super.onDestroy();
     }
 
@@ -78,25 +72,26 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTh
                 ThemeManager.getInstance().changeThemeTo(ThemeManager.THEME_NAME_DEFAULT);
                 break;
             case R.id.btn_update_listview:
+                startActivity(new Intent(this, SecondActivity.class));
                 break;
         }
     }
 
     @Override
     public void onThemeChanged(ThemeInfo oldTheme, ThemeInfo newTheme) {
-        mFactory.getViewAttrManager().applyThemeChange();
+        super.onThemeChanged(oldTheme, newTheme);
+        mAdatper.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LoggerFactory.getDefault().d("clicked position is {}, id is {}", position, id);
-//        mAdatper.mDatas.remove(position);
-//        mAdatper.notifyDataSetChanged();
+        mAdatper.mDatas.remove(position);
+        mAdatper.notifyDataSetChanged();
     }
 
     static class MyAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
-        protected ArrayList<String> mDatas;
+        private ArrayList<String> mDatas;
 
         MyAdapter(Context context) {
             mInflater = LayoutInflater.from(context);
@@ -138,7 +133,13 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTh
             }
 
             holder.content.setText(getItem(position).toString());
+            doAboutTheme(holder, position);
             return convertView;
+        }
+
+        private void doAboutTheme(ViewHolder holder, int position) {
+            holder.content.setBackgroundColor(ThemeManager.getInstance().getCurrentResource().getColor(R.color.textView_background));
+            holder.content.setTextColor(ThemeManager.getInstance().getCurrentResource().getColor(R.color.textView_textColor));
         }
 
         static class ViewHolder {

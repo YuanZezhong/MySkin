@@ -1,4 +1,4 @@
-package cn.sh.changxing.myskin.activity;
+package cn.sh.changxing.myskin.attr;
 
 import android.view.View;
 import android.widget.TextView;

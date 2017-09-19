@@ -13,10 +13,10 @@ import cn.sh.changxing.myskin.skin.attr.AttrFactory;
  * Created by yuanyi on 17-9-17.
  */
 
-public class AppendViewAttrManager implements ViewAttrManager {
+public class SimpleViewAttrManager implements ViewAttrManager {
     private Map<View, ViewAttrItem> mViewAttrsItems;
 
-    public AppendViewAttrManager() {
+    public SimpleViewAttrManager() {
         mViewAttrsItems = new HashMap<>();
     }
 
@@ -65,12 +65,11 @@ public class AppendViewAttrManager implements ViewAttrManager {
 
     @Override
     public void removeViewAttrItems(View... views) {
-
-    }
-
-    @Override
-    public void removeViewAttr(View view, String attrName) {
-
+        if (views != null) {
+            for (View view : views) {
+                removeViewAttrItem(view);
+            }
+        }
     }
 
     @Override
