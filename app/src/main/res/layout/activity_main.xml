@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/layout_background"
+    skin:enable="true"
     tools:context="cn.sh.changxing.myskin.activity.MainActivity">
     <TextView
         android:id="@+id/tv_title"

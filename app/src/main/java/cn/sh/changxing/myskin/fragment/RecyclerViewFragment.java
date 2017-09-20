@@ -15,7 +15,6 @@ import cn.sh.changxing.myskin.skin.OnThemeChangedListener;
 import cn.sh.changxing.myskin.skin.ThemeInfo;
 import cn.sh.changxing.myskin.skin.ThemeManager;
 import cn.sh.changxing.myskin.skin.base.ThemeFragment;
-import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 /**
  * Created by YuanZezhong on 2017/9/19.

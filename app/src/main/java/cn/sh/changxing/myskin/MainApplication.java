@@ -24,6 +24,7 @@ public class MainApplication extends Application {
         mTM = ThemeManager.getInstance();
         mTM.init(this);
         mTM.addThemeInfo(new ThemeInfo("红色主题", "_red", getPackageName()));
+        mTM.changeTheme("红色主题");
         AttrFactory.addSupportAttr("text", TextAttr.class);
     }
 }

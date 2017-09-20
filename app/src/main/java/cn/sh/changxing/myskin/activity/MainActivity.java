@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends ThemeFragmentActivity
     private ListView mListView;
     protected Button mUpdateBtn;
     protected MyAdapter mAdatper;
+    protected ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,11 @@ public class MainActivity extends ThemeFragmentActivity
         mOriginalBtn = ((Button) findViewById(R.id.btn_original));
         mListView = ((ListView) findViewById(R.id.lv_items));
         mUpdateBtn = ((Button) findViewById(R.id.btn_update_listview));
+        mImageView = ((ImageView) findViewById(R.id.iv_pic));
         mUpdateBtn.setOnClickListener(this);
         mRedBtn.setOnClickListener(this);
         mOriginalBtn.setOnClickListener(this);
+        mImageView.setOnClickListener(this);
     }
 
     private void init() {
@@ -65,13 +69,16 @@ public class MainActivity extends ThemeFragmentActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_red:
-                ThemeManager.getInstance().changeThemeTo("红色主题");
+                ThemeManager.getInstance().changeTheme("红色主题");
                 break;
             case R.id.btn_original:
-                ThemeManager.getInstance().changeThemeTo(ThemeManager.THEME_NAME_DEFAULT);
+                ThemeManager.getInstance().changeTheme(ThemeManager.THEME_NAME_DEFAULT);
                 break;
             case R.id.btn_update_listview:
                 startActivity(new Intent(this, SecondActivity.class));
+                break;
+            case R.id.iv_pic:
+                startActivity(new Intent(this, ThirdActivity.class));
                 break;
         }
     }

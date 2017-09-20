@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:skin="http://schemas.android.com/android/skin"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    skin:enable="true"
+    android:background="@color/fragment_background"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/tv_title"
-        android:text="这里是另一个Fragment"
+        android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:textSize="20sp"
         skin:enable="true"
         android:background="@color/textView_background"
         android:textColor="@color/textView_textColor"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

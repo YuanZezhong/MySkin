@@ -12,7 +12,6 @@ import android.widget.Button;
 import cn.sh.changxing.myskin.R;
 import cn.sh.changxing.myskin.skin.ThemeManager;
 import cn.sh.changxing.myskin.skin.base.ThemeFragment;
-import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 public class TestFragment extends ThemeFragment implements View.OnClickListener {
 
@@ -41,10 +40,10 @@ public class TestFragment extends ThemeFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_red:
-                ThemeManager.getInstance().changeThemeTo("红色主题");
+                ThemeManager.getInstance().changeTheme("红色主题");
                 break;
             case R.id.btn_original:
-                ThemeManager.getInstance().changeThemeTo(ThemeManager.THEME_NAME_DEFAULT);
+                ThemeManager.getInstance().changeTheme(ThemeManager.THEME_NAME_DEFAULT);
                 break;
         }
     }

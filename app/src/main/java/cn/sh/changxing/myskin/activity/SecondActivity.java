@@ -7,7 +7,6 @@ import android.widget.FrameLayout;
 import cn.sh.changxing.myskin.R;
 import cn.sh.changxing.myskin.fragment.TestFragment;
 import cn.sh.changxing.myskin.skin.base.ThemeFragmentActivity;
-import cn.sh.changxing.yuanyi.logger.LoggerFactory;
 
 public class SecondActivity extends ThemeFragmentActivity implements View.OnClickListener {
 

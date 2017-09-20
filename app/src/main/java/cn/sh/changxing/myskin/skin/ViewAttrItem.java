@@ -46,13 +46,6 @@ public class ViewAttrItem {
         attrs.add(attr);
     }
 
-    public void replaceAttrs(Set<Attr> attrs) {
-        if (attrs == null) {
-            attrs = new HashSet<>();
-        }
-        this.attrs = attrs;
-    }
-
     public void destroy() {
         attrs.clear();
         attrs = null;

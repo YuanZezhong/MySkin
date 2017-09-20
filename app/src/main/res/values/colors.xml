@@ -10,4 +10,8 @@
 
     <color name="btn_pressed">#445810</color>
     <color name="btn_nomarl">#981F07</color>
+
+    <color name="layout_background">#0F91F0</color>
+
+    <color name="fragment_background">#C48A00</color>
 </resources>

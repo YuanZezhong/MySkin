@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import cn.sh.changxing.myskin.skin.resource.ChangeableResourceParser;
 import cn.sh.changxing.myskin.skin.resource.MultiResourceParser;
 import cn.sh.changxing.myskin.skin.resource.ResourceParser;
 import cn.sh.changxing.myskin.skin.resource.SingleResourceParser;
@@ -48,11 +49,11 @@ public class ThemeManager {
     /**
      * 系统默认主题使用的资源解析器
      */
-    private ResourceParser mDefaultResource;
+    private ChangeableResourceParser mDefaultResource;
     /**
      * 当前主题使用的资源解析器
      */
-    private ResourceParser mCurrentResource;
+    private ChangeableResourceParser mCurrentResource;
     private Resources mOriginalResource;
 
     private ThemeManager() {
@@ -132,14 +133,13 @@ public class ThemeManager {
 
     /**
      * 获取最原始的资源解析器
-     * @return
      */
     public Resources getOriginalResource() {
         return mOriginalResource;
     }
 
     /**
-     * 当前使用的主题是否是默认主题
+     * 判断当前使用的主题是否是默认主题
      *
      * @return true:是, false:不是
      */
@@ -148,7 +148,17 @@ public class ThemeManager {
     }
 
     /**
+     * 判断指定主题是否为默认主题
+     *
+     * @return true:是, false:不是
+     */
+    public boolean isDefaultTheme(ThemeInfo themeInfo) {
+        return mDefaultTheme.equals(themeInfo);
+    }
+
+    /**
      * 判断指定主题是否为当前使用的主题
+     *
      * @return true:是, false:不是
      */
     public boolean isCurrentTheme(ThemeInfo themeInfo) {
@@ -169,20 +179,37 @@ public class ThemeManager {
     /**
      * 更改当前的使用的主题为指定的主题
      *
-     * @param themeName 更改后的主题名称
+     * @param themeName 主题的名称(通过addThemeInfo()添加的主题)
      */
-    public void changeThemeTo(String themeName) {
+    public void changeTheme(String themeName) {
         ThemeInfo themeInfo = mThemeInfos.get(themeName);
-        if (themeInfo != null && themeInfo != mCurrentTheme) {
-            mCurrentResource.changeThemeInfo(themeInfo);
-            ThemeInfo oldTheme = mCurrentTheme;
-            mCurrentTheme = themeInfo;
-            notifyThemeChanged(oldTheme, mCurrentTheme);
+        if (themeInfo != null && !isCurrentTheme(themeInfo)) {
+            switch (mMode) {
+                case MODE_MULTI_APP:
+                    changeThemeInMultiMode(themeInfo);
+                    break;
+                case MODE_SINGLE_APP:
+                default:
+                    changeThemeInSingleMode(themeInfo);
+                    break;
+            }
         }
+    }
+
+    private void changeThemeInSingleMode(ThemeInfo themeInfo) {
+        mCurrentResource.changeThemeInfo(themeInfo);
+        ThemeInfo oldTheme = mCurrentTheme;
+        mCurrentTheme = themeInfo;
+        notifyThemeChanged(oldTheme, mCurrentTheme);
+    }
+
+    private void changeThemeInMultiMode(ThemeInfo themeInfo) {
+
     }
 
     /**
      * 添加主题改变监听器
+     *
      * @param listener
      */
     public void addOnThemeChangedListener(OnThemeChangedListener listener) {
@@ -196,6 +223,7 @@ public class ThemeManager {
 
     /**
      * 移除主题改变监听器
+     *
      * @param listener
      */
     public void removeOnThemeChangedListener(OnThemeChangedListener listener) {
