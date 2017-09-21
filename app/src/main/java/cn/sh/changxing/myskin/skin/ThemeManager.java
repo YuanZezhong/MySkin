@@ -10,6 +10,7 @@ import java.util.Set;
 import cn.sh.changxing.myskin.skin.resource.ChangeableResourceParser;
 import cn.sh.changxing.myskin.skin.resource.MultiResourceParser;
 import cn.sh.changxing.myskin.skin.resource.ResourceParser;
+import cn.sh.changxing.myskin.skin.resource.ResourceUtils;
 import cn.sh.changxing.myskin.skin.resource.SingleResourceParser;
 
 /**
@@ -54,6 +55,9 @@ public class ThemeManager {
      * 当前主题使用的资源解析器
      */
     private ChangeableResourceParser mCurrentResource;
+    /**
+     * App最原始的Resources
+     */
     private Resources mOriginalResource;
 
     private ThemeManager() {
@@ -65,7 +69,7 @@ public class ThemeManager {
         init(context, MODE_SINGLE_APP);
     }
 
-    private void init(Context context, int mode) {
+    public void init(Context context, int mode) {
         mContext = context.getApplicationContext();
         mMode = mode == MODE_MULTI_APP ? MODE_MULTI_APP : MODE_SINGLE_APP;
         ThemeInfo defaultTheme = new ThemeInfo(THEME_NAME_DEFAULT, "", context.getPackageName());
@@ -198,13 +202,22 @@ public class ThemeManager {
 
     private void changeThemeInSingleMode(ThemeInfo themeInfo) {
         mCurrentResource.changeThemeInfo(themeInfo);
-        ThemeInfo oldTheme = mCurrentTheme;
-        mCurrentTheme = themeInfo;
-        notifyThemeChanged(oldTheme, mCurrentTheme);
+        notifyThemeChanged(themeInfo);
     }
 
     private void changeThemeInMultiMode(ThemeInfo themeInfo) {
+        if (isDefaultTheme(themeInfo)) {
+            mCurrentResource.changeThemeInfo(mOriginalResource, themeInfo);
+            notifyThemeChanged(themeInfo);
+        } else {
+            // TODO: 2017/9/21 考虑是否需要另开线程加载资源包以及是否需要缓存资源包
 
+            Resources themeResources = ResourceUtils.createResources(mContext, themeInfo);
+            if (themeResources != null) {
+                mCurrentResource.changeThemeInfo(themeResources, themeInfo);
+                notifyThemeChanged(themeInfo);
+            }
+        }
     }
 
     /**
@@ -233,7 +246,9 @@ public class ThemeManager {
         }
     }
 
-    private void notifyThemeChanged(ThemeInfo oldTheme, ThemeInfo newTheme) {
+    private void notifyThemeChanged(ThemeInfo newTheme) {
+        ThemeInfo oldTheme = mCurrentTheme;
+        mCurrentTheme = newTheme;
         Set<Map.Entry<String, OnThemeChangedListener>> listeners = mListeners.entrySet();
         for (Map.Entry<String, OnThemeChangedListener> listener : listeners) {
             listener.getValue().onThemeChanged(oldTheme, newTheme);

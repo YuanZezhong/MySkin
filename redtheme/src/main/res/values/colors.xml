@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="themeColor">#0FA74E</color>
+
+    <color name="textView_background">#A408C9</color>
+    <color name="textView_textColor">#489901</color>
+
+    <color name="btn_pressed">#021EEC</color>
+    <color name="btn_nomarl">#3899AA</color>
+
+    <color name="layout_background">#F091F7</color>
+
+    <color name="fragment_background">#0C4819</color>
+</resources>
